@@ -6,11 +6,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
 
 require('./config/mongoose');
 const ApiRoutes = require('./routes');
-
-
+const swaggerDocument = require('./openapi.json');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -25,6 +25,7 @@ app.use(cors());
 
 // routes
 app.use(`/api`, ApiRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 const PORT = process.env.PORT || 3000

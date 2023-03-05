@@ -39,7 +39,7 @@ exports.notFoundResponse = (res, msg) => {
   return res.status(API_STATUS.NOT_FOUND).json(resData);
 }
 
-exports.validationErrorResponse = (res, msg, data) => {
+exports.validationErrorResponse = (res, msg) => {
   const resData = {
     success: false,
     data: [],
