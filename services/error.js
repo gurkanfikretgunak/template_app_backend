@@ -1,3 +1,5 @@
+const apiResponse = require('../utils/apiResponse');
+
 /**
  * @extends Error
  */
