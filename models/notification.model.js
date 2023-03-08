@@ -3,13 +3,13 @@ const {Schema, model} = require('mongoose');
 const NotificationSchema = new Schema(
     {
         receiver: {
-            type: mongoose.Schema.Types.ObjectId, 
+            type: Schema.Types.ObjectId, 
             ref: 'User',
             required: true,
         },
         sender: {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'User',
+            type: Schema.Types.ObjectId, 
+            ref: 'Shop',
             required: true,
         },
         message: {

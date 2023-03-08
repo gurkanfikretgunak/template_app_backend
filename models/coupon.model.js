@@ -3,7 +3,7 @@ const {Schema, model} = require('mongoose');
 const CouponSchema = new Schema(
     {
         sharedBy: {
-            type: mongoose.Schema.Types.ObjectId, 
+            type: Schema.Types.ObjectId, 
             ref: 'Shop',
             required: true,
         },

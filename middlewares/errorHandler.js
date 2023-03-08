@@ -2,7 +2,7 @@
 const APIError = require('../services/error');
 const apiResponse = require('../utils/apiResponse');
 
-exports.errorHandler = (err, req, res) => {
+exports.errorHandler = (err, req, res, next) => {
   if (!err) return new APIError('Error', apiResponse.API_STATUS.UNPROCESSABLE_ENTITY, err);
 
   const error = {

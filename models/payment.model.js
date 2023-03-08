@@ -4,7 +4,7 @@ const {Schema, model} = require('mongoose');
 const PaymentSchema = new Schema(
     {
         owner: {
-            type: mongoose.Schema.Types.ObjectId, 
+            type: Schema.Types.ObjectId, 
             ref: 'User',
         },
         name: {

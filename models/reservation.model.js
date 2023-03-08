@@ -3,19 +3,19 @@ const {Schema, model} = require('mongoose');
 const ReservationSchema = new Schema(
     {
         reservationOwner: {
-            type: mongoose.Schema.Types.ObjectId, 
+            type: Schema.Types.ObjectId, 
             ref: 'User',
             required: true,
         },
         reservationPlace: {
-            type: mongoose.Schema.Types.ObjectId, 
+            type: Schema.Types.ObjectId, 
             ref: 'Shop',
             required: true,
         },
         selectedServices: [{
             service: {
                 serviceId: {
-                    type: mongoose.Schema.Types.ObjectId,
+                    type: Schema.Types.ObjectId,
                     ref: 'OfferedService',
                     required: true,
                 },
