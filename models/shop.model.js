@@ -28,7 +28,13 @@ const ShopSchema = new Schema(
         numRates: {
             type: Number,
             default: 0,
-        }
+        },
+        serviceTypes: {
+            type: [{
+              name: String
+            }],
+            default: []
+        }          
     },
     {
         timestamps: { 
