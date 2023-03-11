@@ -1,14 +1,11 @@
 const {Schema, model} = require('mongoose');
 
-const OfferedServiceSchema = new Schema(
+const ServicePackageSchema = new Schema(
     {
         provider: {
             type: Schema.Types.ObjectId, 
             ref: 'Shop',
             required: true,
-        },
-        type: {
-            type: String
         },
         name: {
             type: String,
@@ -25,18 +22,25 @@ const OfferedServiceSchema = new Schema(
         },
         image: {
             type: String
-        }
+        },
+        services: [{
+            type: Schema.Types.ObjectId, 
+            ref: 'OfferedService',
+        }]
     },
     {
-        timestamps: true
+        timestamps: { 
+            createdAt: true, 
+            updatedAt: false 
+        }
     },
 );
 
-OfferedServiceSchema.methods = {
+ServicePackageSchema.methods = {
 
 };
 
 
-const OfferedService = model('OfferedService', OfferedServiceSchema);
+const ServicePackage = model('ServicePackage', ServicePackageSchema);
 
-module.exports = OfferedService;
+module.exports = ServicePackage;
