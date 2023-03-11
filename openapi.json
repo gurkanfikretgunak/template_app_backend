@@ -342,6 +342,2260 @@
           }
         }
       }
+    },
+    "/user/profile": {
+      "patch": {
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "Ruveyda"
+                  },
+                  "surname": {
+                    "example": ""
+                  },
+                  "phoneNumber": {
+                    "example": ""
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": { 
+                "schema": {
+                    "title": "Response",
+                    "type": "object",
+                    "required": [
+                        "success",
+                        "data",
+                        "message",
+                        "pagination"
+                    ],
+                    "properties": {
+                        "success": {
+                            "title": "Success",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "data": {
+                            "title": "Data",
+                            "type": "array",
+                            "default": null,
+                            "items": {
+                                "title": "Items",
+                                "type": "object",
+                                "required": [
+                                    "user"
+                                ],
+                                "properties": {
+                                    "user": {
+                                        "title": "User",
+                                        "type": "object",
+                                        "required": [
+                                            "_id",
+                                            "email",
+                                            "name",
+                                            "surname",
+                                            "password",
+                                            "phoneNumber",
+                                            "gender",
+                                            "favoriteShops",
+                                            "createdAt",
+                                            "updatedAt",
+                                            "__v",
+                                            "profilePicture"
+                                        ],
+                                        "properties": {
+                                            "_id": {
+                                                "title": "_id",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "640362fcf0dd64a537be2f6f"
+                                            },
+                                            "email": {
+                                                "title": "Email",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "ruveyda2@gmail.com"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "ruv"
+                                            },
+                                            "surname": {
+                                                "title": "Surname",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "yilmaz"
+                                            },
+                                            "password": {
+                                                "title": "Password",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "$2a$10$XR9GgBjh5/.4f/2vXJUvYO9I/fU84/d1Npj9U5T6IpBk2tXMG.eWG"
+                                            },
+                                            "phoneNumber": {
+                                                "title": "Phonenumber",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "5325804322"
+                                            },
+                                            "gender": {
+                                                "title": "Gender",
+                                                "type": "integer",
+                                                "default": 0
+                                            },
+                                            "favoriteShops": {
+                                                "title": "Favoriteshops",
+                                                "type": "array",
+                                                "default": null,
+                                                "items": {
+                                                    "title": "Items",
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "example": "6408dba901944083922f1c47"
+                                                }
+                                            },
+                                            "createdAt": {
+                                                "title": "Createdat",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "2023-03-04T15:25:48.382Z"
+                                            },
+                                            "updatedAt": {
+                                                "title": "Updatedat",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "2023-03-11T17:09:50.314Z"
+                                            },
+                                            "__v": {
+                                                "title": "__v",
+                                                "type": "integer",
+                                                "default": 0
+                                            },
+                                            "profilePicture": {
+                                                "title": "Profilepicture",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "https://res.cloudinary.com/dmpfzfgrb/image/upload/v1678219495/template-app/user/1678219494498.jpg"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "message": {
+                            "title": "Message",
+                            "type": "string",
+                            "default": "",
+                            "example": "Successfully updated user profile"
+                        },
+                        "pagination": {
+                            "title": "Pagination",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }       
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/user/password": {
+      "patch": {
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "currentPassword": {
+                    "example": "any"
+                  },
+                  "newPassword": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": { 
+                "schema": {
+                    "title": "Response",
+                    "type": "object",
+                    "required": [
+                        "success",
+                        "data",
+                        "message",
+                        "pagination"
+                    ],
+                    "properties": {
+                        "success": {
+                            "title": "Success",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "data": {
+                            "title": "Data",
+                            "type": "array",
+                            "default": null,
+                            "items": {
+                                "title": "Items",
+                                "type": "object",
+                                "required": [
+                                    "user"
+                                ],
+                                "properties": {
+                                    "user": {
+                                        "title": "User",
+                                        "type": "object",
+                                        "required": [
+                                            "_id",
+                                            "email",
+                                            "name",
+                                            "surname",
+                                            "password",
+                                            "phoneNumber",
+                                            "gender",
+                                            "favoriteShops",
+                                            "createdAt",
+                                            "updatedAt",
+                                            "__v",
+                                            "profilePicture"
+                                        ],
+                                        "properties": {
+                                            "_id": {
+                                                "title": "_id",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "640362fcf0dd64a537be2f6f"
+                                            },
+                                            "email": {
+                                                "title": "Email",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "ruveyda2@gmail.com"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "ruv"
+                                            },
+                                            "surname": {
+                                                "title": "Surname",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "yilmaz"
+                                            },
+                                            "password": {
+                                                "title": "Password",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "$2a$10$yfaD1fYZ635vw6opj.Yvp.N9BR9.Ayh7wapggGFcDMU/lDRVucGtO"
+                                            },
+                                            "phoneNumber": {
+                                                "title": "Phonenumber",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "5325804322"
+                                            },
+                                            "gender": {
+                                                "title": "Gender",
+                                                "type": "integer",
+                                                "default": 0
+                                            },
+                                            "favoriteShops": {
+                                                "title": "Favoriteshops",
+                                                "type": "array",
+                                                "default": null,
+                                                "items": {
+                                                    "title": "Items",
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "example": "6408dba901944083922f1c47"
+                                                }
+                                            },
+                                            "createdAt": {
+                                                "title": "Createdat",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "2023-03-04T15:25:48.382Z"
+                                            },
+                                            "updatedAt": {
+                                                "title": "Updatedat",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "2023-03-11T17:09:02.939Z"
+                                            },
+                                            "__v": {
+                                                "title": "__v",
+                                                "type": "integer",
+                                                "default": 0
+                                            },
+                                            "profilePicture": {
+                                                "title": "Profilepicture",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "https://res.cloudinary.com/dmpfzfgrb/image/upload/v1678219495/template-app/user/1678219494498.jpg"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "message": {
+                            "title": "Message",
+                            "type": "string",
+                            "default": "",
+                            "example": "Successfully updated password"
+                        },
+                        "pagination": {
+                            "title": "Pagination",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }          
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/user/notifications": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": { 
+                "schema": {
+                    "title": "Response",
+                    "type": "object",
+                    "required": [
+                        "success",
+                        "data",
+                        "message",
+                        "pagination"
+                    ],
+                    "properties": {
+                        "success": {
+                            "title": "Success",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "data": {
+                            "title": "Data",
+                            "type": "array",
+                            "default": null,
+                            "items": {
+                                "title": "Items",
+                                "type": "object",
+                                "required": [
+                                    "notifications"
+                                ],
+                                "properties": {
+                                    "notifications": {
+                                        "title": "Notifications",
+                                        "type": "object",
+                                        "required": [
+                                            "today",
+                                            "thisWeek",
+                                            "thisMonth",
+                                            "older"
+                                        ],
+                                        "properties": {
+                                            "today": {
+                                                "title": "Today",
+                                                "type": "array",
+                                                "default": null
+                                            },
+                                            "thisWeek": {
+                                                "title": "Thisweek",
+                                                "type": "array",
+                                                "default": null
+                                            },
+                                            "thisMonth": {
+                                                "title": "Thismonth",
+                                                "type": "array",
+                                                "default": null
+                                            },
+                                            "older": {
+                                                "title": "Older",
+                                                "type": "array",
+                                                "default": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "message": {
+                            "title": "Message",
+                            "type": "string",
+                            "default": "",
+                            "example": "Successfully fetched notifications"
+                        },
+                        "pagination": {
+                            "title": "Pagination",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }            
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/user/favorites": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "title": "Response",
+                    "type": "object",
+                    "required": [
+                        "success",
+                        "data",
+                        "message",
+                        "pagination"
+                    ],
+                    "properties": {
+                        "success": {
+                            "title": "Success",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "data": {
+                            "title": "Data",
+                            "type": "array",
+                            "default": null,
+                            "items": {
+                                "title": "Items",
+                                "type": "object",
+                                "required": [
+                                    "favoritedShops"
+                                ],
+                                "properties": {
+                                    "favoritedShops": {
+                                        "title": "Favoritedshops",
+                                        "type": "array",
+                                        "default": null,
+                                        "items": {
+                                            "title": "Items",
+                                            "type": "string",
+                                            "default": "",
+                                            "example": "6408dba901944083922f1c47"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "message": {
+                            "title": "Message",
+                            "type": "string",
+                            "default": "",
+                            "example": "Successfully fetched favorited shops"
+                        },
+                        "pagination": {
+                            "title": "Pagination",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }             
+                }
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/user/address": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                          "coordinates": {
+                              "title": "Coordinates",
+                              "type": "array",
+                              "default": [40.714, -74.006],
+                              "items": {
+                                  "title": "Items",
+                                  "type": "number",
+                                  "default": 0
+                              }
+                          },
+                          "fullAdress": {
+                              "title": "Fulladress",
+                              "type": "string",
+                              "default": "",
+                              "example": "korfez mah atakum samsun"
+                          },
+                          "city": {
+                              "title": "City",
+                              "type": "string",
+                              "default": "",
+                              "example": "samsun"
+                          },
+                          "country": {
+                              "title": "Country",
+                              "type": "string",
+                              "default": "",
+                              "example": "turkiye"
+                          }
+                        }
+                    }
+                }
+              }
+            }
+          }
+        },        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "title": "Response",
+                    "type": "object",
+                    "required": [
+                        "success",
+                        "data",
+                        "message",
+                        "pagination"
+                    ],
+                    "properties": {
+                        "success": {
+                            "title": "Success",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "data": {
+                            "title": "Data",
+                            "type": "array",
+                            "default": null,
+                            "items": {
+                                "title": "Items",
+                                "type": "object",
+                                "required": [
+                                    "address"
+                                ],
+                                "properties": {
+                                    "address": {
+                                        "title": "Address",
+                                        "type": "object",
+                                        "required": [
+                                            "addressOwner",
+                                            "address",
+                                            "_id",
+                                            "createdAt",
+                                            "updatedAt",
+                                            "__v"
+                                        ],
+                                        "properties": {
+                                            "addressOwner": {
+                                                "title": "Addressowner",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "640362fcf0dd64a537be2f6f"
+                                            },
+                                            "address": {
+                                                "title": "Address",
+                                                "type": "object",
+                                                "required": [
+                                                    "coordinates",
+                                                    "fullAdress",
+                                                    "city",
+                                                    "country"
+                                                ],
+                                                "properties": {
+                                                    "coordinates": {
+                                                        "title": "Coordinates",
+                                                        "type": "array",
+                                                        "default": null,
+                                                        "items": {
+                                                            "title": "Items",
+                                                            "type": "number",
+                                                            "default": 0
+                                                        }
+                                                    },
+                                                    "fullAdress": {
+                                                        "title": "Fulladress",
+                                                        "type": "string",
+                                                        "default": "",
+                                                        "example": "korfez mah atakum samsun"
+                                                    },
+                                                    "city": {
+                                                        "title": "City",
+                                                        "type": "string",
+                                                        "default": "",
+                                                        "example": "samsun"
+                                                    },
+                                                    "country": {
+                                                        "title": "Country",
+                                                        "type": "string",
+                                                        "default": "",
+                                                        "example": "turkiye"
+                                                    }
+                                                }
+                                            },
+                                            "_id": {
+                                                "title": "_id",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "640cb4f8f18eece14a7694f8"
+                                            },
+                                            "createdAt": {
+                                                "title": "Createdat",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "2023-03-11T17:06:00.439Z"
+                                            },
+                                            "updatedAt": {
+                                                "title": "Updatedat",
+                                                "type": "string",
+                                                "default": "",
+                                                "example": "2023-03-11T17:06:00.439Z"
+                                            },
+                                            "__v": {
+                                                "title": "__v",
+                                                "type": "integer",
+                                                "default": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "message": {
+                            "title": "Message",
+                            "type": "string",
+                            "default": "",
+                            "example": "Successfully created an address"
+                        },
+                        "pagination": {
+                            "title": "Pagination",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }           
+                }                
+              }
+            }
+
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "tags": [
+          "auth"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "title": "Response",
+                    "type": "object",
+                    "required": [
+                        "success",
+                        "data",
+                        "message",
+                        "pagination"
+                    ],
+                    "properties": {
+                        "success": {
+                            "title": "Success",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "data": {
+                            "title": "Data",
+                            "type": "array",
+                            "default": null,
+                            "items": {
+                                "title": "Items",
+                                "type": "object",
+                                "required": [
+                                    "addresses"
+                                ],
+                                "properties": {
+                                    "addresses": {
+                                        "title": "Addresses",
+                                        "type": "array",
+                                        "default": null,
+                                        "items": {
+                                            "title": "Items",
+                                            "type": "object",
+                                            "required": [
+                                                "address",
+                                                "_id",
+                                                "addressOwner",
+                                                "createdAt",
+                                                "updatedAt",
+                                                "__v"
+                                            ],
+                                            "properties": {
+                                                "address": {
+                                                    "title": "Address",
+                                                    "type": "object",
+                                                    "required": [
+                                                        "coordinates",
+                                                        "fullAdress",
+                                                        "city",
+                                                        "country"
+                                                    ],
+                                                    "properties": {
+                                                        "coordinates": {
+                                                            "title": "Coordinates",
+                                                            "type": "array",
+                                                            "default": null,
+                                                            "items": {
+                                                                "title": "Items",
+                                                                "type": "number",
+                                                                "default": 0
+                                                            }
+                                                        },
+                                                        "fullAdress": {
+                                                            "title": "Fulladress",
+                                                            "type": "string",
+                                                            "default": "",
+                                                            "example": "korfez mah atakum samsun"
+                                                        },
+                                                        "city": {
+                                                            "title": "City",
+                                                            "type": "string",
+                                                            "default": "",
+                                                            "example": "samsun"
+                                                        },
+                                                        "country": {
+                                                            "title": "Country",
+                                                            "type": "string",
+                                                            "default": "",
+                                                            "example": "turkiye"
+                                                        }
+                                                    }
+                                                },
+                                                "_id": {
+                                                    "title": "_id",
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "example": "64078c57776337c7d838f19a"
+                                                },
+                                                "addressOwner": {
+                                                    "title": "Addressowner",
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "example": "640362fcf0dd64a537be2f6f"
+                                                },
+                                                "createdAt": {
+                                                    "title": "Createdat",
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "example": "2023-03-07T19:11:19.303Z"
+                                                },
+                                                "updatedAt": {
+                                                    "title": "Updatedat",
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "example": "2023-03-07T19:11:19.303Z"
+                                                },
+                                                "__v": {
+                                                    "title": "__v",
+                                                    "type": "integer",
+                                                    "default": 0
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "message": {
+                            "title": "Message",
+                            "type": "string",
+                            "default": "",
+                            "example": "Successfully fetched addresses"
+                        },
+                        "pagination": {
+                            "title": "Pagination",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }          
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/user/address/{id}": {
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": { 
+                "schema": {
+                  "title": "Response",
+                  "type": "object",
+                  "required": [
+                      "success",
+                      "data",
+                      "message",
+                      "pagination"
+                  ],
+                  "properties": {
+                      "success": {
+                          "title": "Success",
+                          "type": "boolean",
+                          "default": true
+                      },
+                      "data": {
+                          "title": "Data",
+                          "type": "array",
+                          "default": null,
+                          "items": {
+                              "title": "Items",
+                              "type": "object",
+                              "required": [
+                                  "_id"
+                              ],
+                              "properties": {
+                                  "_id": {
+                                      "title": "_id",
+                                      "type": "string",
+                                      "default": "",
+                                      "example": "640b7f35e61402379a8c8c87"
+                                  }
+                              }
+                          }
+                      },
+                      "message": {
+                          "title": "Message",
+                          "type": "string",
+                          "default": "",
+                          "example": "Successfully deleted the address"
+                      },
+                      "pagination": {
+                          "title": "Pagination",
+                          "type": "boolean",
+                          "default": true
+                      }
+                  }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/user/payment": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Adds a payment card",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "Name",
+                    "type": "string",
+                    "default": "",
+                    "example": "ruveyda"
+                  },
+                  "surname": {
+                    "title": "Surname",
+                    "type": "string",
+                    "default": "",
+                    "example": "yilmaz"
+                  },
+                  "expirationDate": {
+                    "title": "Expirationdate",
+                    "type": "string",
+                    "default": "",
+                    "example": "2023-04-07"
+                  },
+                  "cardNumber": {
+                    "title": "Cardnumber",
+                    "type": "string",
+                    "default": "",
+                    "example": "2512345478650123"
+                  },
+                  "title": {
+                    "title": "Title",
+                    "type": "string",
+                    "default": "",
+                    "example": "isbank kartim"
+                  }
+                }
+              }
+            }
+          }
+        },        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response",
+                  "type": "object",
+                  "required": [
+                      "success",
+                      "data",
+                      "message",
+                      "pagination"
+                  ],
+                  "properties": {
+                      "success": {
+                          "title": "Success",
+                          "type": "boolean",
+                          "default": true
+                      },
+                      "data": {
+                          "title": "Data",
+                          "type": "array",
+                          "items": {
+                              "title": "Items",
+                              "type": "object",
+                              "required": [
+                                  "card"
+                              ],
+                              "properties": {
+                                "card": {
+                                    "title": "Card",
+                                    "type": "object",
+                                    "required": [
+                                        "owner",
+                                        "name",
+                                        "surname",
+                                        "expirationDate",
+                                        "cardNumber",
+                                        "title",
+                                        "_id",
+                                        "createdAt",
+                                        "updatedAt",
+                                        "__v"
+                                    ],
+                                    "properties": {
+                                      "owner": {
+                                          "title": "Owner",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "640362fcf0dd64a537be2f6f"
+                                      },
+                                      "name": {
+                                          "title": "Name",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "ruveyda"
+                                      },
+                                      "surname": {
+                                          "title": "Surname",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "yilmaz"
+                                      },
+                                      "expirationDate": {
+                                          "title": "Expirationdate",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "2023-04-07T00:00:00.000Z"
+                                      },
+                                      "cardNumber": {
+                                          "title": "Cardnumber",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "$2a$10$X8v45gdnads7sUmO3wW2ZeTtub3Cmf.PXCZmeD3Hvu9Z1gzmBAG3G"
+                                      },
+                                      "title": {
+                                          "title": "Title",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "isbank kartim"
+                                      },
+                                      "_id": {
+                                          "title": "_id",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "640cb23acd4f6bf0be675004"
+                                      },
+                                      "createdAt": {
+                                          "title": "Createdat",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "2023-03-11T16:54:18.027Z"
+                                      },
+                                      "updatedAt": {
+                                          "title": "Updatedat",
+                                          "type": "string",
+                                          "default": "",
+                                          "example": "2023-03-11T16:54:18.027Z"
+                                      },
+                                      "__v": {
+                                          "title": "__v",
+                                          "type": "integer",
+                                          "default": 0
+                                      }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string",
+                      "default": "",
+                      "example": "Successfully created card"
+                  },
+                  "pagination": {
+                      "title": "Pagination",
+                      "type": "boolean",
+                      "default": true
+                  }
+                }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/user/payment/{id}": {
+      "delete": {
+        "description": "Deletes a payment card",
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "title": "Response",
+                    "type": "object",
+                    "required": [
+                        "success",
+                        "data",
+                        "message",
+                        "pagination"
+                    ],
+                    "properties": {
+                      "success": {
+                          "title": "Success",
+                          "type": "boolean",
+                          "default": true
+                      },
+                      "data": {
+                          "title": "Data",
+                          "type": "array",
+                          "default": null,
+                          "items": {
+                              "title": "Items",
+                              "type": "object",
+                              "required": [
+                                  "_id"
+                              ],
+                              "properties": {
+                                  "_id": {
+                                      "title": "_id",
+                                      "type": "string",
+                                      "default": "",
+                                      "example": "640cb23acd4f6bf0be675004"
+                                  }
+                              }
+                          }
+                      },
+                      "message": {
+                          "title": "Message",
+                          "type": "string",
+                          "default": "",
+                          "example": "Successfully deleted the card"
+                      },
+                      "pagination": {
+                          "title": "Pagination",
+                          "type": "boolean",
+                          "default": true
+                      }
+                    }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/user/payments": {
+      "get": {
+        "description": "",
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "title": "Response",
+                    "type": "object",
+                    "required": [
+                        "success",
+                        "data",
+                        "message",
+                        "pagination"
+                    ],
+                    "properties": {
+                        "success": {
+                            "title": "Success",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "data": {
+                          "title": "Data",
+                          "type": "array",
+                          "default": null,
+                          "items": {
+                              "title": "Items",
+                              "type": "object",
+                              "required": [
+                                  "cards"
+                              ],
+                              "properties": {
+                                  "cards": {
+                                      "title": "Cards",
+                                      "type": "array",
+                                      "default": null,
+                                      "items": {
+                                          "title": "Items",
+                                          "type": "object",
+                                          "required": [
+                                              "_id",
+                                              "owner",
+                                              "name",
+                                              "surname",
+                                              "expirationDate",
+                                              "cardNumber",
+                                              "title",
+                                              "createdAt",
+                                              "updatedAt",
+                                              "__v"
+                                          ],
+                                          "properties": {
+                                              "_id": {
+                                                  "title": "_id",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "640cb23acd4f6bf0be675004"
+                                              },
+                                              "owner": {
+                                                  "title": "Owner",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "640362fcf0dd64a537be2f6f"
+                                              },
+                                              "name": {
+                                                  "title": "Name",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "ruveyda"
+                                              },
+                                              "surname": {
+                                                  "title": "Surname",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "yilmaz"
+                                              },
+                                              "expirationDate": {
+                                                  "title": "Expirationdate",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "2023-04-07T00:00:00.000Z"
+                                              },
+                                              "cardNumber": {
+                                                  "title": "Cardnumber",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "$2a$10$X8v45gdnads7sUmO3wW2ZeTtub3Cmf.PXCZmeD3Hvu9Z1gzmBAG3G"
+                                              },
+                                              "title": {
+                                                  "title": "Title",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "isbank kartim"
+                                              },
+                                              "createdAt": {
+                                                  "title": "Createdat",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "2023-03-11T16:54:18.027Z"
+                                              },
+                                              "updatedAt": {
+                                                  "title": "Updatedat",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "2023-03-11T16:54:18.027Z"
+                                              },
+                                              "__v": {
+                                                  "title": "__v",
+                                                  "type": "integer",
+                                                  "default": 0
+                                              }
+                                          }
+                                      }
+                                  }
+                            }
+                        }
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string",
+                      "default": "",
+                      "example": "Successfully fetched cards"
+                  },
+                  "pagination": {
+                      "title": "Pagination",
+                      "type": "boolean",
+                      "default": true
+                  }
+                }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/shop/details/{id}": {
+      "get": {
+        "description": "",
+        "tags": [
+          "shop"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                      "success": {
+                          "title": "Success",
+                          "type": "boolean",
+                          "default": true
+                      },
+                      "data": {
+                          "title": "Data",
+                          "type": "array",
+                          "default": null,
+                          "items": {
+                              "title": "Items",
+                              "type": "object",
+                              "required": [
+                                  "shop",
+                                  "coupons",
+                                  "recommends",
+                                  "packages",
+                                  "isFavorited"
+                              ],
+                              "properties": {
+                                  "shop": {
+                                      "title": "Shop",
+                                      "type": "object",
+                                      "required": [
+                                          "address",
+                                          "_id",
+                                          "name",
+                                          "genderPreference",
+                                          "phoneNumber",
+                                          "averageRating",
+                                          "numRates",
+                                          "serviceTypes"
+                                      ],
+                                      "properties": {
+                                          "address": {
+                                              "title": "Address",
+                                              "type": "object",
+                                              "required": [
+                                                  "coordinates",
+                                                  "fullAdress",
+                                                  "city",
+                                                  "country"
+                                              ],
+                                              "properties": {
+                                                  "coordinates": {
+                                                      "title": "Coordinates",
+                                                      "type": "array",
+                                                      "default": null,
+                                                      "items": {
+                                                          "title": "Items",
+                                                          "type": "number",
+                                                          "default": 0
+                                                      }
+                                                  },
+                                                  "fullAdress": {
+                                                      "title": "Fulladress",
+                                                      "type": "string",
+                                                      "default": "",
+                                                      "example": "Keira throughway"
+                                                  },
+                                                  "city": {
+                                                      "title": "City",
+                                                      "type": "string",
+                                                      "default": "",
+                                                      "example": "samsun"
+                                                  },
+                                                  "country": {
+                                                      "title": "Country",
+                                                      "type": "string",
+                                                      "default": "",
+                                                      "example": "turkiye"
+                                                  }
+                                              }
+                                          },
+                                          "_id": {
+                                              "title": "_id",
+                                              "type": "string",
+                                              "default": "",
+                                              "example": "6408dba901944083922f1c47"
+                                          },
+                                          "name": {
+                                              "title": "Name",
+                                              "type": "string",
+                                              "default": "",
+                                              "example": "Woodlands Hills Salon"
+                                          },
+                                          "genderPreference": {
+                                              "title": "Genderpreference",
+                                              "type": "string",
+                                              "default": "",
+                                              "example": "male"
+                                          },
+                                          "phoneNumber": {
+                                              "title": "Phonenumber",
+                                              "type": "string",
+                                              "default": "",
+                                              "example": "3487123234"
+                                          },
+                                          "averageRating": {
+                                              "title": "Averagerating",
+                                              "type": "integer",
+                                              "default": 0
+                                          },
+                                          "numRates": {
+                                              "title": "Numrates",
+                                              "type": "integer",
+                                              "default": 0
+                                          },
+                                          "serviceTypes": {
+                                              "title": "Servicetypes",
+                                              "type": "array",
+                                              "default": null,
+                                              "items": {
+                                                  "title": "Items",
+                                                  "type": "object",
+                                                  "required": [
+                                                      "_id",
+                                                      "name"
+                                                  ],
+                                                  "properties": {
+                                                      "_id": {
+                                                          "title": "_id",
+                                                          "type": "string",
+                                                          "default": "",
+                                                          "example": "640cb0b3bf3e1aea5a3b9c74"
+                                                      },
+                                                      "name": {
+                                                          "title": "Name",
+                                                          "type": "string",
+                                                          "default": "",
+                                                          "example": "sac"
+                                                      }
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  },
+                                  "coupons": {
+                                      "title": "Coupons",
+                                      "type": "array",
+                                      "default": null,
+                                      "items": {
+                                          "title": "Items",
+                                          "type": "object",
+                                          "required": [
+                                              "_id",
+                                              "sharedBy",
+                                              "couponName",
+                                              "couponDesc",
+                                              "discount",
+                                              "expirationDate"
+                                          ],
+                                          "properties": {
+                                              "_id": {
+                                                  "title": "_id",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "640a409e22908b8633195fee"
+                                              },
+                                              "sharedBy": {
+                                                  "title": "Sharedby",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "6408dba901944083922f1c47"
+                                              },
+                                              "couponName": {
+                                                  "title": "Couponname",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "YUZDE30"
+                                              },
+                                              "couponDesc": {
+                                                  "title": "Coupondesc",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "%30 indirim!!"
+                                              },
+                                              "discount": {
+                                                  "title": "Discount",
+                                                  "type": "integer",
+                                                  "default": 0
+                                              },
+                                              "expirationDate": {
+                                                  "title": "Expirationdate",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "2023-03-12T00:00:00.000Z"
+                                              }
+                                          }
+                                      }
+                                  },
+                                  "recommends": {
+                                      "title": "Recommends",
+                                      "type": "array",
+                                      "default": null,
+                                      "items": {
+                                          "title": "Items",
+                                          "type": "object",
+                                          "required": [
+                                              "_id",
+                                              "provider",
+                                              "name",
+                                              "cost",
+                                              "duration",
+                                              "image",
+                                              "type"
+                                          ],
+                                          "properties": {
+                                              "_id": {
+                                                  "title": "_id",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "6408df0601944083922f1c4b"
+                                              },
+                                              "provider": {
+                                                  "title": "Provider",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "6408dba901944083922f1c47"
+                                              },
+                                              "name": {
+                                                  "title": "Name",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "sac kesimi"
+                                              },
+                                              "cost": {
+                                                  "title": "Cost",
+                                                  "type": "integer",
+                                                  "default": 0
+                                              },
+                                              "duration": {
+                                                  "title": "Duration",
+                                                  "type": "integer",
+                                                  "default": 0
+                                              },
+                                              "image": {
+                                                  "title": "Image",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "https://www.kuaforefrahim.com/wp-content/uploads/2018/10/kuafor-efrahim-yavas-sac-modelleri-3-450x300.jpg"
+                                              },
+                                              "type": {
+                                                  "title": "Type",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "sac"
+                                              }
+                                          }
+                                      }
+                                  },
+                                  "packages": {
+                                      "title": "Packages",
+                                      "type": "array",
+                                      "default": null,
+                                      "items": {
+                                          "title": "Items",
+                                          "type": "object",
+                                          "required": [
+                                              "_id",
+                                              "provider",
+                                              "name",
+                                              "cost",
+                                              "duration",
+                                              "image",
+                                              "services"
+                                          ],
+                                          "properties": {
+                                              "_id": {
+                                                  "title": "_id",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "6408de4301944083922f1c48"
+                                              },
+                                              "provider": {
+                                                  "title": "Provider",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "6408dba901944083922f1c47"
+                                              },
+                                              "name": {
+                                                  "title": "Name",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "tıraş paketi"
+                                              },
+                                              "cost": {
+                                                  "title": "Cost",
+                                                  "type": "integer",
+                                                  "default": 0
+                                              },
+                                              "duration": {
+                                                  "title": "Duration",
+                                                  "type": "integer",
+                                                  "default": 0
+                                              },
+                                              "image": {
+                                                  "title": "Image",
+                                                  "type": "string",
+                                                  "default": "",
+                                                  "example": "https://www.razorus.com/Data/Blog/37.jpg"
+                                              },
+                                              "services": {
+                                                  "title": "Services",
+                                                  "type": "array",
+                                                  "default": null,
+                                                  "items": {
+                                                      "title": "Items",
+                                                      "type": "string",
+                                                      "default": "",
+                                                      "example": "6408df8501944083922f1c4d"
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  },
+                                  "isFavorited": {
+                                      "title": "Isfavorited",
+                                      "type": "boolean",
+                                      "default": true
+                                  }
+                              }
+                          }
+                      },
+                      "message": {
+                          "title": "Message",
+                          "type": "string",
+                          "default": "",
+                          "example": "Successfully fetched shop details"
+                      },
+                      "pagination": {
+                          "title": "Pagination",
+                          "type": "boolean",
+                          "default": true
+                      }
+                  }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/shop/favorite/{id}": {
+      "patch": {
+        "description": "adds the given shop to favorites",
+        "tags": [
+          "shop"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "favoritedShops": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "6408dba901944083922f1c47"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Successfully added shop to favorites"
+                    },
+                    "pagination": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/shop/remove-favorite/{id}": {
+      "patch": {
+        "description": "removes te given shop from favorites",
+        "tags": [
+          "shop"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "services": {
+                            "type": "array",
+                            "example": []
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Successfully removed shop from favorites"
+                    },
+                    "pagination": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/shop/services": {
+      "post": {
+        "description": "fetches services of the kind provided in a store sent as data",
+        "tags": [
+          "shop"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": "6408dba901944083922f1c47"
+                  },
+                  "type": {
+                    "example": "sakal"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "services": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string",
+                                  "example": "6408df8501944083922f1c4d"
+                                },
+                                "provider": {
+                                  "type": "string",
+                                  "example": "6408dba901944083922f1c47"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "sakal kesimi"
+                                },
+                                "cost": {
+                                  "type": "number",
+                                  "example": 30
+                                },
+                                "duration": {
+                                  "type": "number",
+                                  "example": 20
+                                },
+                                "image": {
+                                  "type": "string",
+                                  "example": "https://www.kuaforefrahim.com/wp-content/uploads/2018/10/kuafor-efrahim-yavas-sac-modelleri-3-450x300.jpg"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "example": "sakal"
+                                }                            
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Successfully fetched services"
+                    },
+                    "pagination": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/shop/search": {
+      "post": {
+        "description": "searches services with the given data",
+        "tags": [
+          "shop"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": "6408dba901944083922f1c47"
+                  },
+                  "text": {
+                    "example": "kesimi"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "services": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string",
+                                  "example": "6408df0601944083922f1c4b"
+                                },
+                                "provider": {
+                                  "type": "string",
+                                  "example": "6408dba901944083922f1c47"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "sac kesimi"
+                                },
+                                "cost": {
+                                  "type": "number",
+                                  "example": 60
+                                },
+                                "duration": {
+                                  "type": "number",
+                                  "example": 30
+                                },
+                                "image": {
+                                  "type": "string",
+                                  "example": "https://www.kuaforefrahim.com/wp-content/uploads/2018/10/kuafor-efrahim-yavas-sac-modelleri-3-450x300.jpg"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "example": "sac"
+                                }                            
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Successfully fetched services"
+                    },
+                    "pagination": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/shop/coupons/{id}": {
+      "get": {
+        "description": "fetches all coupons from a shop",
+        "tags": [
+          "shop"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coupons": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string",
+                                  "example": "640a409e22908b8633195fee"
+                                },
+                                "sharedBy": {
+                                  "type": "string",
+                                  "example": "6408dba901944083922f1c47"
+                                },
+                                "couponName": {
+                                  "type": "string",
+                                  "example": "YUZDE30"
+                                },
+                                "couponDesc": {
+                                  "type": "string",
+                                  "example": "%30 indirim!!"
+                                },
+                                "discount": {
+                                  "type": "number",
+                                  "example": "30"
+                                },
+                                "expirationDate": {
+                                  "type": "string",
+                                  "example": "2023-03-12T00:00:00.000Z"
+                                }                            
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Successfully fetched services"
+                    },
+                    "pagination": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }                
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "/shop/coupon": {
+      "post": {
+        "description": "searches a coupon with the given data from a shop",
+        "tags": [
+          "shop"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "example": "YUZDE30"
+                  },
+                  "sharedBy": {
+                    "example": "6408dba901944083922f1c47"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coupon": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "example": "640a409e22908b8633195fee"
+                              },
+                              "sharedBy": {
+                                "type": "string",
+                                "example": "6408dba901944083922f1c47"
+                              },
+                              "couponName": {
+                                "type": "string",
+                                "example": "YUZDE30"
+                              },
+                              "couponDesc": {
+                                "type": "string",
+                                "example": "%30 indirim!!"
+                              },
+                              "discount": {
+                                "type": "number",
+                                "example": "30"
+                              },
+                              "expirationDate": {
+                                "type": "string",
+                                "example": "2023-03-12T00:00:00.000Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Successfully fetched the coupon"
+                    },
+                    "pagination": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }                
+              }
+            }           
+          }
+        }
+      }
     }
   },
   "components": {
