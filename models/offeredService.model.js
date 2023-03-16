@@ -8,7 +8,9 @@ const OfferedServiceSchema = new Schema(
             required: true,
         },
         type: {
-            type: String
+            type: Schema.Types.ObjectId, 
+            ref: 'ServiceType',
+            required: true,
         },
         name: {
             type: String,

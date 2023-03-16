@@ -11,6 +11,9 @@ const User = require('../models/user.model');
 const UserAddress = require('../models/address.model');
 const Payment = require('../models/payment.model');
 const Notification = require('../models/notification.model');
+const ServiceType = require('../models/serviceType.model');
+const Coupon = require('../models/coupon.model');
+const Shop = require('../models/shop.model');
 
 const userController = {};
 
@@ -276,6 +279,71 @@ userController.getFavoriteShops = async (req, res, next) => {
       console.log(error)
       next(new APIError(null, apiResponse.API_STATUS.UNPROCESSABLE_ENTITY, error));
     }
+}
+
+userController.getHome = async (req, res, next) => {
+  TWENTY_KM = 20 * 1000;
+
+  try {
+    const data = {
+      longitude: req.body.longitude,
+      latitude: req.body.latitude,
+    };
+
+    const services = await ServiceType.find().sort({ createdAt: 1 }).limit(6);
+    if(!services && services != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch service types');
+
+    var query = {
+      'address.coordinates': {
+        $near: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [data.longitude, data.latitude]
+          },
+          $maxDistance: TWENTY_KM,
+        }
+      }
+    };
+
+    const shops = await Shop.find(query).limit(6);
+    if(!shops && shops != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch shops');
+
+    var shopIDs = shops.map(shop => {
+      return shop._id;
+    });
+
+    const updatedShops = shops.map(shop => {
+      const distance = shop.distance(data.longitude, data.latitude);
+      const shopObject = shop.toObject();
+      shopObject.distance = distance;
+
+      return shopObject;
+    });
+
+    const coupons = await Coupon.find({sharedBy: { $in: shopIDs }}).sort({ discount: -1 }).limit(6).populate('sharedBy');
+    if(!coupons && coupons != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch coupons');
+
+    const updatedCoupons = await Promise.all(coupons.map(async (coupon) => {
+      const shop = await Shop.findOne({ _id: coupon.sharedBy });
+    
+      const distance = shop.distance(data.longitude, data.latitude);
+      const shopObject = coupon.toObject();
+      shopObject.distance = distance;
+    
+      return shopObject;
+    }));    
+
+    const responseData = {
+      services: services,
+      shops: updatedShops,
+      coupons: updatedCoupons,
+    };
+
+    return apiResponse.successResponse(res, 'Successfully fetched home', responseData);
+  } catch (error) {
+    console.log(error)
+    next(new APIError(null, apiResponse.API_STATUS.UNPROCESSABLE_ENTITY, error));
+  }
 }
 
 module.exports = userController;
