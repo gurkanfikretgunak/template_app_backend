@@ -28,4 +28,6 @@ router.post('/payment', authenticate, validate(schema.addPaymentCardSchema), use
 router.delete('/payment/:id', authenticate, userController.deletePaymentCard);
 router.get('/payments', authenticate, validate(schema.addAddressSchema), userController.getPaymentCards);
 
+router.get('/home', authenticate, userController.getHome);
+
 module.exports = router;

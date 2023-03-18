@@ -19,5 +19,7 @@ router.post('/services', authenticate, shopController.getServicesByType);
 router.post('/search', authenticate, shopController.searchFromShop);
 router.get('/coupons/:id', authenticate, shopController.getShopCoupons);
 router.post('/coupon', authenticate, shopController.searchCouponCode);
+router.post('/rate', authenticate, shopController.rateAShop);
+router.post('/type', authenticate, shopController.getShopsByServiceType);
 
 module.exports = router;
