@@ -75,7 +75,7 @@ shopController.getShopDetails = async (req, res, next) => {
     };
 
     // shop details
-    const shop = await Shop.findOne({_id: data._id});
+    const shop = await Shop.findOne({_id: data._id}).populate({path: 'serviceTypes', select:'_id name'});
     if(!shop) return apiResponse.notFoundResponse(res, 'Could not find a shop with the given id');
 
     // coupons
@@ -251,13 +251,13 @@ shopController.rateAShop = async (req, res, next) => {
 shopController.updateARating = async (req, res, next) => {
   try {
     const data = {
-      ratingId: req.body.rating,
+      ratingId: req.body.ratingId,
       userId: req.payload._id,
       newRating: req.body.newRating,
     };
 
     const rating = await Rating.findOne({raterId: data.userId, _id: data.ratingId});
-    if(!rating) return apiResponse.notFoundResponse(res, 'Could not find a shop with the given id or you are not allowed to view it');
+    if(!rating) return apiResponse.notFoundResponse(res, 'Could not find a rating with the given id or you are not allowed to view it');
 
     const shop = await Shop.findOne({_id: rating.ratedShop});
     if(!shop) return apiResponse.notFoundResponse(res, 'Could not find a shop with the given id');
@@ -282,7 +282,7 @@ shopController.updateARating = async (req, res, next) => {
 shopController.removeARating = async (req, res, next) => {
   try {
     const data = {
-      ratingId: req.body.rating,
+      ratingId: req.params.id,
       userId: req.payload._id,
     };
 
@@ -292,7 +292,8 @@ shopController.removeARating = async (req, res, next) => {
     const shop = await Shop.findOne({_id: rating.ratedShop});
     if(!shop) return apiResponse.notFoundResponse(res, 'Could not find a shop with the given id');
 
-    const newAverage = ((shop.averageRating * shop.numRates) - rating.rating) / (shop.numRates - 1);
+    if(shop.numRates === 1) {var newAverage = 0;}
+    else {var newAverage = ((shop.averageRating * shop.numRates) - rating.rating) / (shop.numRates - 1);}
     const updatedShop = await Shop.findByIdAndUpdate(shop._id, {averageRating: newAverage, $inc: {numRates: -1}}, {new: true});
 
     await Rating.deleteOne({_id: data.ratingId});
@@ -309,10 +310,13 @@ shopController.removeARating = async (req, res, next) => {
 }
 
 shopController.searchAll = async (req, res, next) => {
+  TWENTY_KM = 20 * 1000;
+
   try {
     const data = {
       text: req.body.text,
-      location: req.body.location,
+      longitude: req.body.longitude,
+      latitude: req.body.latitude,
     };
 
     const searchWords = data.text.trim().split(/\s+/);
@@ -358,21 +362,34 @@ shopController.searchAll = async (req, res, next) => {
             {name: {$regex: new RegExp(word, 'i')}},
           ]
         })),
-        {
-          address: {
-            country: location.country,
-            city: location.city,
+        data.longitude && {
+          'address.coordinates': {
+            $near: {
+              $geometry: {
+                type: 'Point',
+                coordinates: [data.longitude, data.latitude]
+              },
+              $maxDistance: TWENTY_KM
+            }
           }
-        }
+        },
       ]
     };
     
     const shops = await Shop.find(query).sort({createdAt: -1});
     if(!shops && shops != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch shops');
 
+    const recommendations = await ServiceType.aggregate([{$sample: {size: 3}}]);
+    if(!recommendations && recommendations != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch recommendations');
+
+    // TODO: add nearby trending shops after finishing reservations  
+    // const trendingShops = await Shop.find()
+
     const responseData = {
       services: services,
       shops: shops,
+      trending: 'work in progress',
+      recommendations: recommendations,
     };
 
     return apiResponse.successResponse(res, 'Successfully fetched search results', responseData);
@@ -447,6 +464,94 @@ shopController.getShopsByServiceType = async (req, res, next) => {
     };
 
     return apiResponse.successResponse(res, 'Successfully fetched shops with the given service type', responseData);
+  } catch (error) {
+    console.log(error)
+    next(new APIError(null, apiResponse.API_STATUS.UNPROCESSABLE_ENTITY, error));
+  }
+}
+
+shopController.searchWithFilter = async (req, res, next) => {
+  TWENTY_KM = 20 * 1000;
+
+  try {
+    const data = {
+      text: req.body.text,
+      longitude: req.body.longitude,
+      latitude: req.body.latitude,
+      gender: req.body.gender,
+      price: req.body.price,
+    };
+
+    const searchWords = data.text? data.text.trim().split(/\s+/) : [];
+    
+    // find service types with the given data
+    var query = {
+      $and: [
+        ...searchWords.map(word => ({
+          $or: [
+            {name: {$regex: new RegExp(word, 'i')}},
+          ]
+        })),
+      ]
+    };
+    
+    const types = await ServiceType.find(query);
+    if(!types && types != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch types');
+
+    var typeIDs = types.map(type => {
+      return type._id;
+    });
+
+    // find offered services with the given data
+    const priceQuery = data.price && {cost: {$gte: data.price[0], $lte: data.price[1]}};
+    var query = {
+      $and: [
+        ...searchWords.map(word => ({
+          $or: [
+            {name: {$regex: new RegExp(word, 'i')}},
+            {type: {$in: typeIDs}},
+          ]
+        })),
+      ],
+      ...priceQuery
+    };
+    
+    const services = await OfferedService.find(query).sort({createdAt: -1});
+    if(!services && services != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch services');
+
+    // find shops with the given data
+    const genderQuery = data.gender && { genderPreference: data.gender };
+    var query = {
+      $and: [
+        ...searchWords.map(word => ({
+          $or: [
+            {name: {$regex: new RegExp(word, 'i')}},
+          ]
+        })),
+        data.longitude && {
+          'address.coordinates': {
+            $near: {
+              $geometry: {
+                type: 'Point',
+                coordinates: [data.longitude, data.latitude]
+              },
+              $maxDistance: TWENTY_KM
+            }
+          }
+        },
+      ],
+      ...genderQuery
+    };
+    
+    const shops = await Shop.find(query).sort({createdAt: -1});
+    if(!shops && shops != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch shops');
+
+    const responseData = {
+      services: services,
+      shops: shops,
+    };
+
+    return apiResponse.successResponse(res, 'Successfully fetched search results', responseData);
   } catch (error) {
     console.log(error)
     next(new APIError(null, apiResponse.API_STATUS.UNPROCESSABLE_ENTITY, error));

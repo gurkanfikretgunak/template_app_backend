@@ -30,9 +30,8 @@ const ShopSchema = new Schema(
             default: 0,
         },
         serviceTypes: {
-            type: [{
-              name: String
-            }],
+            type: [Schema.Types.ObjectId], 
+            ref: 'OfferedService',
             default: []
         }          
     },
