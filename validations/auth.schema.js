@@ -9,6 +9,11 @@ exports.registerSchema = Joi.object({
     gender: Joi.number().valid(0, 1, 2, 3),
 });
 
+exports.verifyAccountSchema = Joi.object({
+    email: Joi.string().email().required(),
+    code: Joi.number().required(),
+});
+
 exports.loginSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),

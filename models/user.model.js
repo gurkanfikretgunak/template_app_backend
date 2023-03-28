@@ -1,11 +1,14 @@
+// PACKAGES
 const {compareSync, hashSync} = require('bcrypt-nodejs');
 const {Schema, model} = require('mongoose');
 const JWT = require('jsonwebtoken');
 
+// UTILS / HELPERS / SERVICES
 const APIError = require('../services/error.js');
 const apiResponse = require('../utils/apiResponse');
-const client = require('../config/redis')
-
+const client = require('../config/redis');
+const {sendEmail} = require('../helpers/mailer');
+const {generateCode} = require('../helpers/helper');
 
 const UserSchema = new Schema(
     {
@@ -23,7 +26,6 @@ const UserSchema = new Schema(
         surname: {
             type: String,
             trim: true,
-            required: true,
         },
         password: {
             type: String,
@@ -45,7 +47,26 @@ const UserSchema = new Schema(
         favoriteShops: {
             type: [String],
             default: [],
-        }
+        },
+        facebookId: {
+            type: String,
+            unique: true,
+            sparse: true,
+        },
+        googleId: {
+            type: String,
+            unique: true,
+            sparse: true,
+        },
+        twitterId: {
+            type: String,
+            unique: true,
+            sparse: true,
+        },
+        verified: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamps: true
@@ -53,9 +74,35 @@ const UserSchema = new Schema(
 );
 
 // Hash the user password on creation
-UserSchema.pre('save', function(next) {
-    this.password = this._hashPassword(this.password);
-    return next();
+UserSchema.pre('save', async function(next) {
+    try {
+      this.password = this._hashPassword(this.password);
+  
+      const code = generateCode();
+      await sendEmail({
+        toUser: this.email,
+        code: code,
+        type: 0
+      });
+  
+      if(this.facebookId || this.googleId || this.twitterId) {
+        this.verified = true;
+      } else {
+        const id = this._id.toString();
+        const key = `code:${id.toString()}`;
+        await client.SET(key, code, 'EX', 60 * 60, (err) => {
+            if (err) {
+            console.log(err.message)
+            reject(next(new APIError(null, apiResponse.API_STATUS.UNPROCESSABLE_ENTITY, err.message)))
+            }
+        });        
+      }
+  
+      return next();
+    } catch (err) {
+      console.error(err);
+      return next(new APIError(null, apiResponse.API_STATUS.UNPROCESSABLE_ENTITY, err.message));
+    }
 });
 
 UserSchema.methods = {
