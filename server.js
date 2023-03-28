@@ -11,6 +11,7 @@ const swaggerUi = require('swagger-ui-express');
 require('./config/mongoose');
 const ApiRoutes = require('./routes');
 const swaggerDocument = require('./openapi.json');
+const passport = require('./config/passport');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(cors());
+app.use(passport.initialize());
 
 // routes
 app.use(`/api`, ApiRoutes);
