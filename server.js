@@ -12,9 +12,12 @@ require('./config/mongoose');
 const ApiRoutes = require('./routes');
 const swaggerDocument = require('./openapi.json');
 const passport = require('./config/passport');
+const socket = require('./utils/socket');
 
 const app = express();
 const httpServer = http.createServer(app);
+
+socket(httpServer, http);
 
 // middlewares
 app.use(bodyParser.urlencoded({
