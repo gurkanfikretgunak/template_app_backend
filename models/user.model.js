@@ -45,7 +45,8 @@ const UserSchema = new Schema(
             default: 0,
         },
         favoriteShops: {
-            type: [String],
+            type: [Schema.Types.ObjectId], 
+            ref: 'Shop',
             default: [],
         },
         facebookId: {
