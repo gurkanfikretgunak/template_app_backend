@@ -87,7 +87,7 @@ shopController.getShopDetails = async (req, res, next) => {
     if(!recommends && recommends != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch service recommendations');
 
     // offered packages
-    const packages = await ServicePackage.find({provider: data._id}).sort({createdAt: -1});
+    const packages = await ServicePackage.find({provider: data._id}).sort({createdAt: -1}).populate('services');
     if(!packages && packages != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch service packages');
 
     // if the user favorited this shop
@@ -122,7 +122,7 @@ shopController.getServicesByType = async (req, res, next) => {
       type: req.body.type,
     };
 
-    const services = await OfferedService.find(data).sort({createdAt: -1});
+    const services = await req.PaginationProcess(OfferedService.find(data).populate('provider type'));
     if(!services && services != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch services');
 
     const responseData = {
@@ -158,7 +158,7 @@ shopController.searchFromShop = async (req, res, next) => {
       ]
     };
     
-    const services = await OfferedService.find(query).sort({createdAt: -1});
+    const services = await req.PaginationProcess(OfferedService.find(query).populate('type'));
     if(!services && services != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch services');
 
     const responseData = {
@@ -351,7 +351,7 @@ shopController.searchAll = async (req, res, next) => {
       ]
     };
     
-    const services = await OfferedService.find(query).sort({createdAt: -1});
+    const services = await req.servicesPaginationProcess(OfferedService.find(query).populate('provider type'));
     if(!services && services != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch services');
 
     // find shops with the given data
@@ -376,7 +376,7 @@ shopController.searchAll = async (req, res, next) => {
       ]
     };
     
-    const shops = await Shop.find(query).sort({createdAt: -1});
+    const shops = await req.shopsPaginationProcess(Shop.find(query));
     if(!shops && shops != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch shops');
 
     const recommendations = await ServiceType.aggregate([{$sample: {size: 3}}]);
@@ -437,7 +437,7 @@ shopController.getShopsByServiceType = async (req, res, next) => {
       ...priceQuery,
     };
 
-    const services = await OfferedService.find(query).sort({createdAt: -1}).populate('provider');
+    const services = await req.PaginationProcess(OfferedService.find(query).populate('provider'));
     if(!services && services != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch services');
 
     const updatedServices = await Promise.all(services.map(async (service) => {
@@ -516,7 +516,7 @@ shopController.searchWithFilter = async (req, res, next) => {
       ...priceQuery
     };
     
-    const services = await OfferedService.find(query).sort({createdAt: -1});
+    const services = await req.servicesPaginationProcess(OfferedService.find(query).populate('provider type'));
     if(!services && services != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch services');
 
     // find shops with the given data
@@ -543,7 +543,7 @@ shopController.searchWithFilter = async (req, res, next) => {
       ...genderQuery
     };
     
-    const shops = await Shop.find(query).sort({createdAt: -1});
+    const shops = await req.shopsPaginationProcess(Shop.find(query).populate('serviceTypes'));
     if(!shops && shops != null) return apiResponse.serverErrorResponse(res, 'Unable to fetch shops');
 
     const responseData = {

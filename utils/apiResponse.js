@@ -21,7 +21,7 @@ exports.successResponse = (res, msg, data) => {
   };
 
   if (res.pagination) {
-    resData['pagination'] = true; // wip
+    resData['pagination'] = true;
   } else {
     resData['pagination'] = false;
   }

@@ -134,7 +134,7 @@ userController.getAddresses = async (req, res, next) => {
         addressOwner: req.payload._id,
       };
 
-      const addresses = await UserAddress.find(data);  //TODO: Decide whether to add pagination or not.
+      const addresses = await req.PaginationProcess(UserAddress.find(data));
       if(!addresses) return apiResponse.serverErrorResponse(res, 'Unable to fetch addresses');
 
       const responseData = {
@@ -202,7 +202,7 @@ userController.getPaymentCards = async (req, res, next) => {
         owner: req.payload._id,
       };
 
-      const cards = await Payment.find(data);   //TODO: Pagination
+      const cards = await req.PaginationProcess(Payment.find(data));
       if(!cards) return apiResponse.serverErrorResponse(res, 'Unable to fetch cards');
 
       const responseData = {
@@ -222,7 +222,7 @@ userController.getNotifications = async (req, res, next) => {
         receiver: req.payload._id,
       };
 
-      const notifications = await Notification.find(data);
+      const notifications = await req.PaginationProcess(Notification.find(data));
       if(!notifications) return apiResponse.serverErrorResponse(res, 'Unable to fetch notifications');
 
       var formattedData = {
@@ -267,7 +267,7 @@ userController.getFavoriteShops = async (req, res, next) => {
         _id: req.payload._id,
       };
 
-      const user = await User.findOne(data);
+      const user = await User.findOne(data).populate('favoriteShops');;
       if(!user) return apiResponse.serverErrorResponse(res, 'Unable to fetch user');
 
       const responseData = {
