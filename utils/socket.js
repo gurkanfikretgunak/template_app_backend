@@ -44,7 +44,7 @@ const socket = (server, http) => {
             });
             
             req.on('error', error => {
-              console.error("SOCKET ERROR → currency got error", error);
+              console.error("SOCKET ➤ Currency API error", error);
               reject(error);
             });
             
@@ -85,7 +85,7 @@ const socket = (server, http) => {
             });
             
             req.on('error', error => {
-              console.error("SOCKET ERROR → currency got error", error);
+              console.error("SOCKET ➤ Currency API error", error);
               reject(error);
             });
             
@@ -103,26 +103,26 @@ const socket = (server, http) => {
         socket.on("add-new-user", (newUserId) => {
           if (!users.find((user) => user.userId === newUserId)) {
             users.push({ userId: newUserId, socketId: socket.id });
-            console.log("SOCKET LOG → new user connected");
+            console.log("SOCKET ➤ New user connected");
           }
           io.emit("get-users", users);
         });
 
         socket.on("currencies", async () => {
             const currencies = await fetchCurrencies();
-            console.log(currencies);
+            // console.log(currencies);
             io.emit("get-currencies", currencies);
         });
 
         socket.on("currency", async (data) => {
             const currencies = await fetchCurrency(data);
-            console.log(currencies);
+            // console.log(currencies);
             io.emit("get-currency", currencies);
         });
 
         socket.on("disconnect", () => {
             users = users.filter((user) => user.socketId !== socket.id);
-            console.log("SOCKET LOG → user disconnected");
+            console.log("SOCKET ➤ User disconnected");
             io.emit("get-users", users);
         });
     });

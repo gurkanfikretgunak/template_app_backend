@@ -14,12 +14,12 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('MongoDB connected')
+    console.log('DATABASE ➤ MongoDB connected')
   })
   .catch((err) => console.log(err.message))
 
 mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected to db')
+  console.log('DATABASE ➤ Mongoose connected to MongoDB')
 })
 
 mongoose.connection.on('error', (err) => {
@@ -27,7 +27,7 @@ mongoose.connection.on('error', (err) => {
 })
 
 mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose connection is disconnected.')
+  console.log('DATABASE ➤ Mongoose disconnected')
 })
 
 // shut down running connection if the server is terminated
