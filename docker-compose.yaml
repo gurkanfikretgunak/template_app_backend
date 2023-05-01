@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+
+  # App service
+  templateapp:
+    # Build app image from Dockerfile in current directory
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Map container port 3000 to host port 3000
+    ports:
+      - "3000:3000"
+    # Use .env file to load environment variables
+    env_file:
+      - ./.env
+    # Depend on Redis service
+    depends_on:
+      - redis
+    # Use non-root user
+    user: node
+    # Use read-only file system
+    read_only: true
+    # Set a restart policy in case of errors
+    restart: unless-stopped
+
+  # Redis service
+  redis:
+    # Use official Redis image
+    image: redis
+    # Map container port 6379 to host port 6379
+    ports:
+      - "6379:6379"
+    # Use read-only file system
+    read_only: true
+    # Set a restart policy in case of errors
+    restart: unless-stopped
