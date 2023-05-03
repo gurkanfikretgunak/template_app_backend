@@ -6,11 +6,11 @@ const client = redis.createClient({
 })
 
 client.on('connect', () => {
-  console.log('Client connected to redis...');
+  console.log('REDIS ➤ Client connected to Redis');
 });
 
 client.on('ready', () => {
-  console.log('Client connected to redis and ready to use...');
+  console.log('REDIS ➤ Redis is ready to use');
 });
 
 client.on('error', (err) => {
@@ -18,7 +18,7 @@ client.on('error', (err) => {
 });
 
 client.on('end', () => {
-  console.log('Client disconnected from redis');
+  console.log('REDIS ➤ Client disconnected from Redis');
 });
 
 process.on('SIGINT', () => {
